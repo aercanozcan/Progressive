@@ -9,6 +9,11 @@ Progressive.showProgress(view);
 
 Progressive.hideProgress(view);
 ```
+Custom views are supported :
+```java
+Progressive.showProgress(view,R.layout.your_indicator);
+```
+
 Gradle import :
 ```gradle
 repositories { 
