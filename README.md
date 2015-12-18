@@ -1,5 +1,6 @@
 # Progressive
-Simple Progress indicator helper
+Simple Progress indicator helper. But why?
+Are you sick of changing layouts and wrapping views in ViewGroups just to show a stupid progress bar? Progressive eliminitas that burden as much as possible. Feel free to contribute!
 
 
 
