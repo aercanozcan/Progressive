@@ -25,7 +25,7 @@ public class Progressive {
      * @param view the target view
      */
     public static void showProgress(View view,int resourceId){
-        pool.showProgress(view);
+        pool.showProgress(view,resourceId);
     }
 
     /**
