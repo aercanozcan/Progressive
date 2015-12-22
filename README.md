@@ -1,4 +1,7 @@
 # Progressive
+
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Progressive-green.svg?style=true)](https://android-arsenal.com/details/1/2934)
+
 Simple Progress indicator helper. But why?
 Are you sick of changing layouts and wrapping views in ViewGroups just to show a stupid progress bar? Progressive eliminates that burden as much as possible. Feel free to contribute!
 
