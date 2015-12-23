@@ -12,7 +12,7 @@ import android.widget.FrameLayout;
  * Created by Ercan on 12/16/2015.
  *
  */
-public class Progress {
+ class Progress {// package access only
 
     private ViewGroup parent;
     private View view;
@@ -36,6 +36,9 @@ public class Progress {
         init();
     }
 
+    /**
+     * shared initializer for constructors
+     */
     private void init(){
         try {
             this.parent = (ViewGroup) view.getParent();
@@ -80,7 +83,7 @@ public class Progress {
             frameLayout.addView(view);//put original vie in frame layout
             frameLayout.addView(progressBar);//then overlay progressbar on original view
             parent.addView(frameLayout,originalPosition);// then replace the original view with new frame layout
-            encapsulated = true;//flag es encapsulated
+            encapsulated = true;//set flag as encapsulated
 
 
 
@@ -92,7 +95,7 @@ public class Progress {
     }
 
     /**
-     * unwraps the view from frame layout and removes progressview
+     * unwraps the view from frame layout and removes progress view
      */
     private void unBox(){
 
@@ -101,11 +104,15 @@ public class Progress {
         frameLayout.removeView(view);//removes the original view from frame layout
         view.setLayoutParams(layoutParams);
         parent.removeView(frameLayout);//removes the frame layout from parent
+        frameLayout.removeView(progressBar);
+        progressBar = null;
         parent.addView(view, originalPosition, layoutParams);//adds back the original view to its original position
         encapsulated = false;//sets the flag as un-boxed
     }
 
-
+    /**
+     * Shows the progress bar if it is boxed else box it by calling {@link #box()} then set visibility as {@link View#VISIBLE}
+     */
     public void showProgress(){
         if(!encapsulated){
            box();
@@ -113,6 +120,9 @@ public class Progress {
         progressBar.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Shows the progress bar if it is boxed else un-box it by calling {@link #unBox()} then set visibility as {@link View#GONE}
+     */
     public void hideProgress(){
         progressBar.setVisibility(View.GONE);
         if(encapsulated){
@@ -120,20 +130,30 @@ public class Progress {
         }
     }
 
+
+    /**
+     * To use {@link java.util.Collection} methods
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
 
         return ((Progress)o).getView().equals(view);
     }
 
+    /**
+     * to retreve original view related to this {@link Progress} object
+     * @return
+     */
     public View getView() {
         return view;
     }
 
-    public void setView(View view) {
-        this.view = view;
-    }
-
+    /**
+     * To check if this Progress is ready to be shown
+     * @return
+     */
     public boolean isEncapsulated() {
         return encapsulated;
     }

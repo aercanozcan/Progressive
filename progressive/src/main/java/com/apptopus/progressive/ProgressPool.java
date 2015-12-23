@@ -6,15 +6,16 @@ import java.util.ArrayList;
 
 /**
  * Created by Ercan on 12/16/2015.
+ * The singleton class that manages a pool of {@link Progress} objects
  */
-public class ProgressPool {
+class ProgressPool {// package access only
 
     private static ProgressPool instance = null;
 
     private ArrayList<Progress> pool = new ArrayList<>();
 
 
-    private   ProgressPool(){
+    private   ProgressPool(){// singleton access only
     }
 
 
@@ -26,9 +27,10 @@ public class ProgressPool {
     }
 
 
-
-
-
+    /**
+     * Finds a {@link Progress} object related to view if exist. Creates a new one if does not exist. calls its {@link Progress#showProgress()} method
+     * @param view
+     */
     public void showProgress(View view){
 
         Progress p = new Progress(view);
@@ -43,7 +45,11 @@ public class ProgressPool {
 
     }
 
-
+    /**
+     * Finds a {@link Progress} object related to view if exist. Creates a new one if does not exist. {@link Progress#showProgress()} method
+     * @param view
+     * @param resourceId
+     */
     public void showProgress(View view,int resourceId){
 
         Progress p = new Progress(view,resourceId);
@@ -57,7 +63,10 @@ public class ProgressPool {
         }
 
     }
-
+    /**
+     * Finds a {@link Progress} object related to view if exist and calls its {@link Progress#hideProgress()} method, then removes it from pool.
+     * @param view
+     */
     public void hideProgress(View view){
         Progress p = new Progress(view);
         if(pool.contains(p)){
@@ -66,10 +75,13 @@ public class ProgressPool {
             pool.remove(p);
         }
         else{
-            p = null;
+            p = null;// same as doing nothing.
         }
     }
 
+    /**
+     * Clears all Progress objects from pool
+     */
     public void clearPool(){
         for(Progress progress : pool){
             if(progress.isEncapsulated()){

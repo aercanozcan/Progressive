@@ -10,7 +10,10 @@ public class Progressive {
 
     public static String DEBUG_TAG="PROGRESSIVE";
 
-    public static ProgressPool pool = ProgressPool.getInstance();
+    private static ProgressPool pool = ProgressPool.getInstance();
+
+    private Progressive() {//static access only
+    }
 
     /**
      * Shows default progress view in center of the target view
