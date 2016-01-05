@@ -48,11 +48,11 @@ class ProgressPool {// package access only
     /**
      * Finds a {@link Progress} object related to view if exist. Creates a new one if does not exist. {@link Progress#showProgress()} method
      * @param view
-     * @param resourceId
+     * @param customProgressView
      */
-    public void showProgress(View view,int resourceId){
+    public void showProgress(View view, View customProgressView){
 
-        Progress p = new Progress(view,resourceId);
+        Progress p = new Progress(view, customProgressView);
         if(pool.contains(p)){
             p = pool.get(pool.indexOf(p));
             p.showProgress();
