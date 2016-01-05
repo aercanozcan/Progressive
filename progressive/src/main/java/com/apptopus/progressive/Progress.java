@@ -1,11 +1,12 @@
 package com.apptopus.progressive;
 
+import android.content.res.TypedArray;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 
 
 /**
@@ -19,7 +20,6 @@ import android.widget.FrameLayout;
     private boolean encapsulated = false;
     private int originalPosition = 0;
     private View progressBar;
-    private int resourceId = R.layout.generic_progress;
 
 
 
@@ -29,10 +29,9 @@ import android.widget.FrameLayout;
 
     }
 
-    public Progress(View v , int resourceId){
-
+    public Progress(View v, View customProgressView){
         this.view = v;
-        this.resourceId = resourceId;
+        this.progressBar = customProgressView;
         init();
     }
 
@@ -61,8 +60,16 @@ import android.widget.FrameLayout;
      */
     private void box(){
         try {
+            // if there is no custom progress view
+            if (progressBar == null) {
+                int[] attrs = new int[] { R.attr.actionBarSize};
+                TypedArray ta = view.getContext().obtainStyledAttributes(attrs);
+                int progressBarThreshold = ta.getDimensionPixelSize(0, -1);
+                ta.recycle();
+                int shortEdgeOfView = (view.getHeight() > view.getWidth()) ? view.getWidth() : view.getHeight();
 
-            progressBar =  LayoutInflater.from(view.getContext()).inflate(resourceId, parent, false); //inflate the resource
+                progressBar = new ProgressBar(view.getContext(), null, (progressBarThreshold < shortEdgeOfView) ? android.R.attr.progressBarStyleLarge : android.R.attr.progressBarStyleSmall);
+            }
 
             FrameLayout.LayoutParams progressLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);//create layout params for progress indicator
             progressLayoutParams.gravity = Gravity.CENTER;//set gravity as center for align in center of view

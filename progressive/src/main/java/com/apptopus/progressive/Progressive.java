@@ -27,8 +27,8 @@ public class Progressive {
      * Shows custom progress view in center of the target view
      * @param view the target view
      */
-    public static void showProgress(View view,int resourceId){
-        pool.showProgress(view,resourceId);
+    public static void showProgress(View view, View customProgressView){
+        pool.showProgress(view, customProgressView);
     }
 
     /**
