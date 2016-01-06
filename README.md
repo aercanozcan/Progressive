@@ -17,9 +17,11 @@ Progressive.hideProgress(view);
 
 Custom views are supported :
 ```java
-Progressive.showProgress(view,R.layout.your_indicator);
+Progressive.showProgress(view,yourCustomView);
 ```
 <img src="https://cloud.githubusercontent.com/assets/2137007/12136808/fd774dbc-b453-11e5-9e12-493120f5f1c2.png" width="45%"></img> 
+
+Sample app is included in [app] module.
 
 Gradle import :
 ```gradle
