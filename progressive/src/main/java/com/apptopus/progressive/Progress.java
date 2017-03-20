@@ -11,9 +11,8 @@ import android.widget.ProgressBar;
 
 /**
  * Created by Ercan on 12/16/2015.
- *
  */
- class Progress {// package access only
+class Progress {// package access only
 
     private ViewGroup parent;
     private View view;
@@ -22,14 +21,13 @@ import android.widget.ProgressBar;
     private View progressBar;
 
 
-
-    public Progress(View v){
+    public Progress(View v) {
         this.view = v;
         init();
 
     }
 
-    public Progress(View v, View customProgressView){
+    public Progress(View v, View customProgressView) {
         this.view = v;
         this.progressBar = customProgressView;
         init();
@@ -38,31 +36,31 @@ import android.widget.ProgressBar;
     /**
      * shared initializer for constructors
      */
-    private void init(){
+    private void init() {
         try {
             this.parent = (ViewGroup) view.getParent();
             int childCount = parent.getChildCount();
-            for(int i = 0; i < childCount; i++){
-                if(parent.getChildAt(i).equals(view)){
+            for (int i = 0; i < childCount; i++) {
+                if (parent.getChildAt(i).equals(view)) {
                     originalPosition = i;
                     break;
                 }
             }
 
-        }catch (ClassCastException e){
+        } catch (ClassCastException e) {
             e.printStackTrace();
-            Log.e(Progressive.DEBUG_TAG,"View's parent must extend ViewGroup");
+            Log.e(Progressive.DEBUG_TAG, "View's parent must extend ViewGroup");
         }
     }
 
     /**
      * Wraps the view with a frame layout and puts a progress indicator in it
      */
-    private void box(){
+    private void box() {
         try {
             // if there is no custom progress view
             if (progressBar == null) {
-                int[] attrs = new int[] { R.attr.actionBarSize};
+                int[] attrs = new int[]{R.attr.actionBarSize};
                 TypedArray ta = view.getContext().obtainStyledAttributes(attrs);
                 int progressBarThreshold = ta.getDimensionPixelSize(0, -1);
                 ta.recycle();
@@ -71,7 +69,7 @@ import android.widget.ProgressBar;
                 progressBar = new ProgressBar(view.getContext(), null, (progressBarThreshold < shortEdgeOfView) ? android.R.attr.progressBarStyleLarge : android.R.attr.progressBarStyleSmall);
             }
 
-            FrameLayout.LayoutParams progressLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);//create layout params for progress indicator
+            FrameLayout.LayoutParams progressLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);//create layout params for progress indicator
             progressLayoutParams.gravity = Gravity.CENTER;//set gravity as center for align in center of view
             progressBar.setLayoutParams(progressLayoutParams);
 
@@ -89,14 +87,13 @@ import android.widget.ProgressBar;
 
             frameLayout.addView(view);//put original vie in frame layout
             frameLayout.addView(progressBar);//then overlay progressbar on original view
-            parent.addView(frameLayout,originalPosition);// then replace the original view with new frame layout
+            parent.addView(frameLayout, originalPosition);// then replace the original view with new frame layout
             encapsulated = true;//set flag as encapsulated
 
 
-
-        }catch (ClassCastException e){
+        } catch (ClassCastException e) {
             e.printStackTrace();
-            Log.e(Progressive.DEBUG_TAG,"View's parent must extend ViewGroup");
+            Log.e(Progressive.DEBUG_TAG, "View's parent must extend ViewGroup");
         }
 
     }
@@ -104,10 +101,10 @@ import android.widget.ProgressBar;
     /**
      * unwraps the view from frame layout and removes progress view
      */
-    private void unBox(){
+    private void unBox() {
 
         FrameLayout frameLayout = (FrameLayout) view.getParent();//we know that the parent of original view is a frame layout
-        ViewGroup.LayoutParams layoutParams =  frameLayout.getLayoutParams();//recovers the former layout params
+        ViewGroup.LayoutParams layoutParams = frameLayout.getLayoutParams();//recovers the former layout params
         frameLayout.removeView(view);//removes the original view from frame layout
         view.setLayoutParams(layoutParams);
         parent.removeView(frameLayout);//removes the frame layout from parent
@@ -120,19 +117,20 @@ import android.widget.ProgressBar;
     /**
      * Shows the progress bar if it is boxed else box it by calling {@link #box()} then set visibility as {@link View#VISIBLE}
      */
-    public void showProgress(){
-        if(!encapsulated){
-           box();
+    public void showProgress() {
+        if (!encapsulated) {
+            box();
         }
         progressBar.setVisibility(View.VISIBLE);
+        progressBar.bringToFront();
     }
 
     /**
      * Shows the progress bar if it is boxed else un-box it by calling {@link #unBox()} then set visibility as {@link View#GONE}
      */
-    public void hideProgress(){
+    public void hideProgress() {
         progressBar.setVisibility(View.GONE);
-        if(encapsulated){
+        if (encapsulated) {
             unBox();
         }
     }
@@ -140,17 +138,19 @@ import android.widget.ProgressBar;
 
     /**
      * To use {@link java.util.Collection} methods
+     *
      * @param o
      * @return
      */
     @Override
     public boolean equals(Object o) {
 
-        return ((Progress)o).getView().equals(view);
+        return ((Progress) o).getView().equals(view);
     }
 
     /**
      * to retreve original view related to this {@link Progress} object
+     *
      * @return
      */
     public View getView() {
@@ -159,6 +159,7 @@ import android.widget.ProgressBar;
 
     /**
      * To check if this Progress is ready to be shown
+     *
      * @return
      */
     public boolean isEncapsulated() {

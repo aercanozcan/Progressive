@@ -17,13 +17,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button btnToggle = (Button)findViewById(R.id.btnToggle);
-        Button btnToggleCustom = (Button)findViewById(R.id.btnToggleCustom);
+        Button btnToggle = (Button) findViewById(R.id.btnToggle);
+        Button btnToggleCustom = (Button) findViewById(R.id.btnToggleCustom);
 
-        final ImageView imgDummy1 = (ImageView)findViewById(R.id.imageView1);
-        final ImageView imgDummy2 = (ImageView)findViewById(R.id.imageView2);
-        final ImageView imgDummy3 = (ImageView)findViewById(R.id.imageView3);
-        final ImageView imgDummy4 = (ImageView)findViewById(R.id.imageView4);
+        final ImageView imgDummy1 = (ImageView) findViewById(R.id.imageView1);
+        final ImageView imgDummy2 = (ImageView) findViewById(R.id.imageView2);
+        final ImageView imgDummy3 = (ImageView) findViewById(R.id.imageView3);
+        final ImageView imgDummy4 = (ImageView) findViewById(R.id.imageView4);
 
         final TextView customProgress = new TextView(this);
         customProgress.setText("This is a Custom Progress..");
@@ -53,14 +53,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(progress){
+                if (progress) {
                     Progressive.hideProgress(imgDummy1);
                     Progressive.hideProgress(imgDummy2);
                     Progressive.hideProgress(imgDummy3);
                     Progressive.hideProgress(imgDummy4);
                     progress = false;
-                }
-                else{
+                } else {
                     Progressive.showProgress(imgDummy4, customProgress);
                     progress = true;
                 }

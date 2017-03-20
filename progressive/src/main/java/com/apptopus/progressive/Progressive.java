@@ -8,7 +8,7 @@ import android.view.View;
  */
 public class Progressive {
 
-    public static String DEBUG_TAG="PROGRESSIVE";
+    public static String DEBUG_TAG = "PROGRESSIVE";
 
     private static ProgressPool pool = ProgressPool.getInstance();
 
@@ -17,25 +17,28 @@ public class Progressive {
 
     /**
      * Shows default progress view in center of the target view
+     *
      * @param view the target view
      */
-    public static void showProgress(View view){
+    public static void showProgress(View view) {
         pool.showProgress(view);
     }
 
     /**
      * Shows custom progress view in center of the target view
+     *
      * @param view the target view
      */
-    public static void showProgress(View view, View customProgressView){
+    public static void showProgress(View view, View customProgressView) {
         pool.showProgress(view, customProgressView);
     }
 
     /**
      * Hides targets the progress view if exist
+     *
      * @param view the target view
      */
-    public static void hideProgress(View view){
+    public static void hideProgress(View view) {
         pool.hideProgress(view);
     }
 }
