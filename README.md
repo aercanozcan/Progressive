@@ -30,7 +30,7 @@ repositories {
         maven { url "https://jitpack.io" }
    }
    dependencies {
-          compile 'com.github.aercanozcan:Progressive:v1.0.1'
+          compile 'com.github.aercanozcan:Progressive:v1.0.2'
    }
 ```
 
