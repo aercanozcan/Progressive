@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Progressive.iml" filepath="$PROJECT_DIR$/Progressive.iml" />
       <module fileurl="file://$PROJECT_DIR$/SampleApp.iml" filepath="$PROJECT_DIR$/SampleApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/progressive/progressive.iml" filepath="$PROJECT_DIR$/progressive/progressive.iml" />
